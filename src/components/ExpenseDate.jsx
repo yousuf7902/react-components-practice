@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import "./ExpenseDate.css";
 
 function ExpenseDate(props){
