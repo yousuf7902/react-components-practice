@@ -1,14 +1,24 @@
 import Card from "./Card";
 import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
+import ExpensesFilter from "./ExpensesFilter";
+import {useState} from 'react';
 
 function Expenses(props) {
     const expenses = props.items;
+
+    const [filterDate, setFilterDate] = useState("");
+
+    const visibleData = filterDate
+        ? expenses.filter((e) => e.date.getFullYear() === parseInt(filterDate))
+        : expenses;
+
     return (
         <Card className="Expenses">
+            <ExpensesFilter expenses={expenses} onFilterByDate={(data) => setFilterDate(data)} />
             {
                 <>
-                    {expenses.map((expense) => (
+                    {visibleData.map((expense) => (
                         <ExpenseItem
                             key={expense.id}
                             title={expense.title}
